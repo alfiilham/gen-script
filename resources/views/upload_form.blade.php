@@ -40,6 +40,7 @@
         @php
             $allResults = '';
             $allEmailResults = '';
+            $allRenameEmail = '';
         @endphp
 
         @foreach($importedData as $data)
@@ -59,14 +60,17 @@
             $nameParts = explode(" ", $lowercaseName);
             $lastname = end($nameParts);
             $angka = substr($data['nrp'], 0, 5);
-            $email = $nameParts[0].'.'.$lastname.$angka.'@polri.go.id';
+            $emailAlias = $nameParts[0].'.'.$lastname.$angka.'@polri.go.id';
+            $email = $data['nrp'].'@polri.go.id';
             $pass = $pw;
             ?>
             @php
-                $result = "zmprov ca $email $pass cn '$data[nama]' displayName '$data[nama]' givenName $gName sn $sName description '$data[kesatuan]'";
+                $result = "zmprov ca $email $pass cn '$data[nama]' displayName '$data[nama]' givenName $gName sn $sName description '$data[kesatuan]' ; zmprov aaa $email $emailAlias ";
                 $allResults .= $result . PHP_EOL;
                 $emailResult = "$email";
                 $allEmailResults .= $emailResult . PHP_EOL;
+                $RenameEmail = "zmprov RenameAccount $emailAlias $email ; zmprov AddAccountAlias $email $emailAlias";
+                $allRenameEmail .= $RenameEmail . PHP_EOL;
             @endphp
 
         @endforeach
@@ -77,6 +81,10 @@
         <div class="input-group mb-3">
             <textarea class="form-control" rows="10">{{ $allEmailResults }}</textarea>
             <button class="btn btn-outline-secondary" type="button" data-clipboard-text="{{ $allEmailResults }}">Copy All</button>
+        </div>
+        <div class="input-group mb-3">
+            <textarea class="form-control" rows="10">{{ $allRenameEmail}}</textarea>
+            <button class="btn btn-outline-secondary" type="button" data-clipboard-text="{{ $allRenameEmail }}">Copy All</button>
         </div>
     @endif
 </div>
