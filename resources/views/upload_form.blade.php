@@ -69,7 +69,7 @@
                 $allResults .= $result . PHP_EOL;
                 $emailResult = "$email";
                 $allEmailResults .= $emailResult . PHP_EOL;
-                $RenameEmail = "zmprov RenameAccount $emailAlias $email ; zmprov AddAccountAlias $email $emailAlias";
+                $RenameEmail = "zmprov RenameAccount '$data[email]' $email ; zmprov AddAccountAlias $email '$data[email]'";
                 $allRenameEmail .= $RenameEmail . PHP_EOL;
             @endphp
 

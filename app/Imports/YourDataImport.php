@@ -18,6 +18,7 @@ class YourDataImport implements ToCollection
                 'pangkat' => $row[2],
                 'nrp' => $row[3],
                 'kesatuan' => $row[4],
+                'email' => $row[5],
             ];
         }
     }
