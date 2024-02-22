@@ -23,3 +23,4 @@ Route::post('/upload', [ExcelController::class, 'upload'])->name('upload');
 Route::get('/script-postqueue', function () {
     return view('script_postqueue');
 });
+Route::get('/download-sample-excel', [ExcelController::class, 'download'])->name('download.sample.excel');

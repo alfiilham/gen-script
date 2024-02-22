@@ -26,6 +26,7 @@
                                 <input type="text" class="form-control" id="pw" name="pw">
                             </div>
                             <button type="submit" class="btn btn-primary">Upload</button>
+                            <a href="{{ route('download.sample.excel') }}" class="btn btn-primary">Download Sample Excel</a>
                         </form>
                     </div>
                 </div>
@@ -35,7 +36,7 @@
     <!-- Your Blade View -->
 <div class="mt-5">
     @if(empty($importedData))
-        <p>No data imported yet.</p>
+        <p class="text-center">No data imported yet.</p>
     @else
         @php
             $allResults = '';

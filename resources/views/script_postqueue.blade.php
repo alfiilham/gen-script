@@ -10,7 +10,7 @@
                 <div class="card-body">
                     <form>
                         <div class="form-group">
-                            <label for="text">Text</label>
+                            <label for="text">NRP</label>
                             <textarea class="form-control" id="text" rows="5" placeholder="Enter your text containing multiple words"></textarea>
                         </div>
                     </form>
@@ -19,7 +19,7 @@
             </div>
             <div class="card">
                 <div class="card-body">
-                    <textarea id="wordList" class="form-control" id="text" rows="5"></textarea>
+                    <textarea id="wordList" class="form-control" rows="5"></textarea>
                     <button class="btn btn-primary mt-2" id="copyBtn">Copy</button>
                 </div>
             </div>
@@ -43,19 +43,16 @@
     var newText = '';
     words.forEach(function(word) {
         var modifiedString = addBackslash(word);
-        newText += `postqueue -p | tail -n +2 | awk 'BEGIN { RS = "" } /@` + modifiedString + `/ { print $1 }' | tr -d '*!' | postsuper -d -  ;`;
+        newText += `mailq | `+ modifiedString +`@polri.go.id | cut -f 1 -d ' ' | tr -d '*' | xargs -n 1 postsuper -d ;`;
     });
     document.getElementById('wordList').value = newText.trim();
     });
 
     // Function to copy the words to the clipboard
     document.getElementById('copyBtn').addEventListener('click', function() {
-        var wordListText = document.getElementById('wordList').innerText;
-        navigator.clipboard.writeText(wordListText).then(function() {
-            alert('Words copied to clipboard!');
-        }, function(err) {
-            console.error('Failed to copy: ', err);
-        });
+        var wordListText = document.getElementById('wordList').value;
+        console.log(wordListText);
+        navigator.clipboard.writeText(wordListText);
     });
 </script>
 @endsection
