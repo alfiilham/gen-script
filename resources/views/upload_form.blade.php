@@ -66,7 +66,7 @@
             $pass = $pw;
             ?>
             @php
-                $result = "zmprov ca $email $pass cn '$data[nama]' displayName '$data[nama]' givenName $gName sn $sName description '$data[kesatuan]' ; zmprov aaa $email $emailAlias ";
+                $result = "zmprov ca $email $pass cn '$data[nama]' displayName '$data[nama]' givenName $gName sn $sName description '$data[kesatuan]' ; zmprov aaa $email $emailAlias; zmprov ma $email zimbraPasswordMustChange TRUE;";
                 $allResults .= $result . PHP_EOL;
                 $emailResult = "$email";
                 $allEmailResults .= $emailResult . PHP_EOL;
