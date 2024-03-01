@@ -43,7 +43,7 @@
     var newText = '';
     words.forEach(function(word) {
         var modifiedString = addBackslash(word);
-        newText += `mailq | `+ modifiedString +`@polri.go.id | cut -f 1 -d ' ' | tr -d '*' | xargs -n 1 postsuper -d ;`;
+        newText += `mailq | grep `+ modifiedString +`@polri.go.id | cut -f 1 -d ' ' | tr -d '*' | xargs -n 1 postsuper -d ;`;
     });
     document.getElementById('wordList').value = newText.trim();
     });
