@@ -19,7 +19,9 @@ Route::get('/', function () {
     return view('home');
 });
 Route::get('/upload-form', [ExcelController::class, 'showForm']);
+Route::get('/new-upload-form', [ExcelController::class, 'newshowForm']);
 Route::post('/upload', [ExcelController::class, 'upload'])->name('upload');
+Route::post('/new-upload', [ExcelController::class, 'newupload'])->name('newupload');
 Route::get('/script-postqueue', function () {
     return view('script_postqueue');
 });

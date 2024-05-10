@@ -43,7 +43,6 @@
             $allEmailResults = '';
             $allRenameEmail = '';
         @endphp
-
         @foreach($importedData as $data)
             
             <?php
@@ -52,21 +51,30 @@
                 $name = substr($data['nama'], 0, $commaPosition);
                 $nameWithoutTitles = trim($name);
             }else{
-                $nameWithoutTitles = $data['nama'];
+                $nameWithoutTitles = trim($data['nama']);
             }
-            $nameParts = explode(" ",$nameWithoutTitles);
-            $gName = $nameParts[0];
+            // Cari posisi titik (.) dalam string
+            $dotPosition = strrpos($nameWithoutTitles, '.');
+            // Jika titik ditemukan
+            if ($dotPosition !== false) {
+                // Potong string dari posisi setelah titik ke depan
+                $nameWithoutTitles = substr($nameWithoutTitles, $dotPosition + 1);
+            }
+            $name=trim($nameWithoutTitles);
+            $OldnameParts = explode(" ",$nameWithoutTitles);
+            $nameParts = array_filter($OldnameParts);
+            $gName = reset($nameParts);
             $sName = end($nameParts);
             $lowercaseName = strtolower($nameWithoutTitles);
             $nameParts = explode(" ", $lowercaseName);
             $lastname = end($nameParts);
             $angka = substr($data['nrp'], 0, 5);
-            $emailAlias = $nameParts[0].'.'.$lastname.$angka.'@polri.go.id';
+            $emailAlias = strtolower($gName).'.'.$lastname.$angka.'@polri.go.id';
             $email = $data['nrp'].'@polri.go.id';
             $pass = $pw;
             ?>
             @php
-                $result = "zmprov ca $email $pass cn '$data[nama]' displayName '$data[nama]' givenName $gName sn $sName description '$data[kesatuan]' ; zmprov aaa $email $emailAlias; zmprov ma $email zimbraPasswordMustChange TRUE;";
+                $result = "zmprov ca $email $pass cn '$name' displayName '$name' givenName $gName sn $sName description '$data[kesatuan]' ; zmprov aaa $email $emailAlias; zmprov ma $email zimbraPasswordMustChange TRUE;";
                 $allResults .= $result . PHP_EOL;
                 $emailResult = "$email";
                 $allEmailResults .= $emailResult . PHP_EOL;
