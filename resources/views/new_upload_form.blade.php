@@ -22,6 +22,7 @@
                                 <input type="file" class="form-control-file" name="file" accept=".xlsx, .xls">
                             </div>
                             <button type="submit" class="btn btn-primary">Upload</button>
+                            <a href="{{ route('download.new.sample.excel') }}" class="btn btn-primary">Download Sample Excel</a>
                         </form>
                     </div>
                 </div>

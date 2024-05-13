@@ -59,6 +59,19 @@ class ExcelController extends Controller
         // Return the file as a download response
         return Response::download($filePath, 'sample_excel.xlsx');
     }
+    public function downloadNew()
+    {
+        // Path to the sample Excel file
+        $filePath = public_path('sample_excel_new.xlsx');
+
+        // Check if the file exists
+        if (!file_exists($filePath)) {
+            abort(404, 'File not found');
+        }
+
+        // Return the file as a download response
+        return Response::download($filePath, 'sample_excel_new.xlsx');
+    }
     public function newupload(Request $request)
     {
         $request->validate([

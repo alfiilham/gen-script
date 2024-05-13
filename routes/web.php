@@ -26,3 +26,4 @@ Route::get('/script-postqueue', function () {
     return view('script_postqueue');
 });
 Route::get('/download-sample-excel', [ExcelController::class, 'download'])->name('download.sample.excel');
+Route::get('/download-new-sample-excel', [ExcelController::class, 'downloadNew'])->name('download.new.sample.excel');
