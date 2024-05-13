@@ -63,7 +63,7 @@
         $output = "";
         $count = 0;
         foreach ($nameParts as $kata) {
-            if (strlen($kata) >= 4) {
+            if (strlen($kata) >= 3) {
                 $output .= $kata . ".";
                 $count++;
 
