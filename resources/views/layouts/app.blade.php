@@ -24,10 +24,13 @@
                     <a class="nav-link" href="/">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/upload-form">Upload Form </a>
+                    <a class="nav-link" href="/upload-form">Script Create Account</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="/script-postqueue">Script Postqueue</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/new-upload-form">Script Create Alias</a>
                 </li>
                 <!-- Add more navigation items as needed -->
             </ul>

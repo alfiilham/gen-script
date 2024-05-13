@@ -39,25 +39,46 @@
 
         @foreach($importedData as $data)
         <?php
-        $at_position = strpos($data['email'], "@");
-        if ($at_position !== false) {
-            // Extract the substring before the "@" symbol
-            $substring_before_at = substr($data['email'], 0, $at_position);
+        $parts = explode("@", $data['email']);
+        $nrp = $parts[0];
+        $commaPosition = strpos($data['nama'], ',');
+        if ($commaPosition !== false) {
+            $name = substr($data['nama'], 0, $commaPosition);
+            $nameWithoutTitles = trim($name);
+        }else{
+            $nameWithoutTitles = trim($data['nama']);
+        }
+        // Cari posisi titik (.) dalam string
+        $dotPosition = strrpos($nameWithoutTitles, '.');
+        // Jika titik ditemukan
+        if ($dotPosition !== false) {
+            // Potong string dari posisi setelah titik ke depan
+            $nameWithoutTitles = substr($nameWithoutTitles, $dotPosition + 1);
+        }
+        $name=trim($nameWithoutTitles);
+        $lowercaseName = strtolower($nameWithoutTitles);
+        $OldnameParts = explode(" ",$lowercaseName);
+        $nameParts = array_filter($OldnameParts);
+        $output = "";
+        $count = 0;
+        foreach ($nameParts as $kata) {
+            if (strlen($kata) >= 4) {
+                $output .= $kata . ".";
+                $count++;
 
-            // Remove leading zeros if any
-            $substring_before_at = ltrim($substring_before_at, "0");
-
-            // Get the length of the remaining string
-            $num_digits = strlen($substring_before_at);
-
-            // Check if the number of digits before "@" is not 8
-            if ($num_digits !== 8) {
-                // Output the email address
-                echo $data['email'] . PHP_EOL;
+                if ($count == 1) {
+                    break; // Berhenti loop setelah mengambil 2 kata
+                }
             }
         }
+        $gName = rtrim($output, ".");
+        $sName = end($nameParts);
+        $angka = substr($nrp, 0, 5);
+        $emailAlias = $gName.'.'.$sName.$angka.'@polri.go.id';
+        $CreateAliasEmail = "zmprov aaa '$data[email]' $emailAlias";
+        $allResults .= $CreateAliasEmail . PHP_EOL;
         ?>
-@endforeach
+        @endforeach
 
         <div class="input-group mb-3">
             <textarea class="form-control" rows="10">{{ $allResults }}</textarea>

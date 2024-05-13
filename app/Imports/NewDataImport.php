@@ -11,10 +11,11 @@ class NewDataImport implements ToCollection
 
     public function collection(Collection $rows)
     {
-        $rows = $rows->slice(1);
+        $rows = $rows->slice(2);
         foreach ($rows as $row) {
             $this->allData[] = [
-                'email' => $row[0],
+                'email' => $row[1],
+                'nama' => $row[2],
             ];
         }
     }
