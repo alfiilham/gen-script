@@ -87,7 +87,6 @@ class ExcelController extends Controller
 
         // Retrieve the imported data
         $importedData = $import->getAllData();
-        dd($importedData);
         return view('new_upload_form', compact('importedData','pw'))->with('success', 'Excel file uploaded and data retrieved successfully.');
     }
 }

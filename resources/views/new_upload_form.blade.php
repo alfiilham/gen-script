@@ -49,31 +49,21 @@
         }else{
             $nameWithoutTitles = trim($data['nama']);
         }
-        // Cari posisi titik (.) dalam string
-        $dotPosition = strrpos($nameWithoutTitles, '.');
-        // Jika titik ditemukan
-        if ($dotPosition !== false) {
-            // Potong string dari posisi setelah titik ke depan
-            $nameWithoutTitles = substr($nameWithoutTitles, $dotPosition + 1);
-        }
-        $name=trim($nameWithoutTitles);
-        $lowercaseName = strtolower($nameWithoutTitles);
+        $nama = rtrim($nameWithoutTitles, ".");
+        $name=trim($nama);
+        $lowercaseName = strtolower($nama);
         $OldnameParts = explode(" ",$lowercaseName);
         $nameParts = array_filter($OldnameParts);
         $output = "";
-        $count = 0;
         foreach ($nameParts as $kata) {
             if (strlen($kata) >= 3) {
                 $output .= $kata . ".";
-                $count++;
-
-                if ($count == 1) {
-                    break; // Berhenti loop setelah mengambil 2 kata
-                }
             }
         }
-        $gName = rtrim($output, ".");
-        $sName = end($nameParts);
+        $newOutput = explode(".",$output);
+        $names = array_filter($newOutput);
+        $gName = reset($names);
+        $sName = end($names);
         $angka = substr($nrp, 0, 5);
         $emailAlias = $gName.'.'.$sName.$angka.'@polri.go.id';
         $CreateAliasEmail = "zmprov aaa '$data[email]' $emailAlias";
