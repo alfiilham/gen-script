@@ -4,8 +4,9 @@ namespace App\Imports;
 
 use Illuminate\Support\Collection;
 use Maatwebsite\Excel\Concerns\ToCollection;
+use Maatwebsite\Excel\Concerns\WithChunkReading;
 
-class NewDataImport implements ToCollection
+class NewDataImport implements ToCollection,WithChunkReading
 {
     protected $allData = [];
 
@@ -25,4 +26,9 @@ class NewDataImport implements ToCollection
         return $this->allData;
     }
 
+    public function chunkSize(): int
+    {
+        return 60000;
+    }
+    
 }
