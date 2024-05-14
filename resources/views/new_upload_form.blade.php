@@ -39,7 +39,11 @@
         @endphp
 
         @foreach($importedData as $data)
+        @if (is_null($data['nama']))
+            @continue
+        @endif
         <?php
+
         $parts = explode("@", $data['email']);
         $nrp = $parts[0];
         $commaPosition = strpos($data['nama'], ',');
@@ -49,7 +53,8 @@
         }else{
             $nameWithoutTitles = trim($data['nama']);
         }
-        $nama = rtrim($nameWithoutTitles, ".");
+        $namaBaru = rtrim($nameWithoutTitles, ".");
+        $nama = str_replace("'", "", $namaBaru);
         $name=trim($nama);
         $lowercaseName = strtolower($nama);
         $OldnameParts = explode(" ",$lowercaseName);
