@@ -43,7 +43,6 @@ class ExcelController extends Controller
             }));
         });
         $importedData = array_values($data);
-        dd($importedData);
         return view('upload_form', compact('importedData','pw'))->with('success', 'Excel file uploaded and data retrieved successfully.');
     }
     public function download()
