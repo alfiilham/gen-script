@@ -66,7 +66,7 @@
         $sName = end($names);
         $angka = substr($nrp, 0, 5);
         $emailAlias = $gName.'.'.$sName.$angka.'@polri.go.id';
-        $CreateAliasEmail = "zmprov aaa '$data[email]' $emailAlias;".'echo "done add alias '.$data['email'].';"';
+        $CreateAliasEmail = "zmprov aaa '$data[email]' $emailAlias;".'echo "done add alias '.$data['email'].'";';
         $allResults .= $CreateAliasEmail . PHP_EOL;
         ?>
         @endforeach
