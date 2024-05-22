@@ -55,6 +55,7 @@
         }
         $namaBaru = rtrim($nameWithoutTitles, ".");
         $nama = str_replace("'", "", $namaBaru);
+        $nama = str_replace(";", "", $nama);
         $name=trim($nama);
         $lowercaseName = strtolower($nama);
         $OldnameParts = explode(" ",$lowercaseName);

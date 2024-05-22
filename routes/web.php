@@ -18,6 +18,9 @@ use App\Http\Controllers\ExcelController;
 Route::get('/', function () {
     return view('home');
 });
+Route::get('/php-info', function () {
+    return view('php');
+});
 Route::get('/upload-form', [ExcelController::class, 'showForm']);
 Route::get('/new-upload-form', [ExcelController::class, 'newshowForm']);
 Route::post('/upload', [ExcelController::class, 'upload'])->name('upload');
